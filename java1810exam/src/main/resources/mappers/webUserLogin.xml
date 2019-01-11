@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" > 
+<mapper namespace="com.hqyj.dao.WebUserLogin">
+
+<select id="findByNameAndPwd" resultType="com.hqyj.pojo.WebUser">
+SELECT
+	web_name AS webName,
+	web_password AS webPassword
+FROM
+	web_user
+WHERE
+	web_name = #{webName}
+AND web_password = #{webPassword}
+</select>
+
+</mapper>

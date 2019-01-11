@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-4.3.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<context:component-scan base-package="com.hqyj.service"></context:component-scan>
+<context:component-scan base-package="com.hqyj.aspect"></context:component-scan>
+<!-- 使用IOC容器管理Gson工具，避免一个个new，直接注入 -->
+<bean class="com.google.gson.Gson" id="gson"></bean>
+<!--  -->
+
+<!-- 开启AOP功能 -->
+<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+<!-- end AOP -->
+</beans>

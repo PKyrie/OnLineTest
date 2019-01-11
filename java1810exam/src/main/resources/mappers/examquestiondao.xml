@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hqyj.dao.ExamQuestionDao">
+	<insert id="insert" parameterType="com.hqyj.pojo.ExamQuestion" useGeneratedKeys="true" keyProperty="titleId" keyColumn="title_id">
+		<!-- <selectKey resultType="java.lang.Integer" order="AFTER" keyProperty="titleId" keyColumn="title_id">
+			select LAST_INSERT_ID
+		</selectKey> -->
+		INSERT INTO exam_question(title_name,title_score,type) VALUES(#{titleName},#{titleScore},#{type})
+	</insert>
+	
+	<select id="selectAllQuestionAndOptions" resultMap="QuestionAndOptionsMap">
+		SELECT
+			*
+		FROM
+			exam_question AS Q
+		LEFT JOIN exam_options AS O ON Q.title_id = O.titleid
+		WHERE
+			Q.TYPE = '0'
+	</select>
+	<resultMap type="com.hqyj.pojo.QuestionAndOptions" id="QuestionAndOptionsMap">
+		<id column="title_id" property="titleId"/>
+		<result column="title_name" property="titleName"/>
+		<result column="title_score" property="titleScore"/>
+		<result column="type" property="type"/>
+		<collection property="options" ofType="com.hqyj.pojo.ExamOptions">
+			<id column="option_id" property="optionId"/>
+			<result column="option_desc" property="optionDesc"/>
+			<result column="option_flag" property="optionFlag"/>
+			<result column="titleid" property="titleId"/>
+		</collection>
+	</resultMap>
+	
+</mapper>
